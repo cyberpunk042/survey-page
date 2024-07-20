@@ -415,27 +415,40 @@ function App() {
     alert(results);
   }, []);
 
+  const initializeSurvey = useCallback(() => {
+    const survey = new Model(surveyJson);
+    surveyRef.current = survey;
+    survey.onComplete.add(alertResults);
+
+    // Apply the initial theme
+    const currentTheme = theme === 'default-light' ? defaultLightTheme : defaultDarkTheme;
+    survey.applyTheme(currentTheme);
+
+    // Load survey state
+    loadSurveyState(survey);
+
+    // Save state on value change
+    survey.onValueChanged.add(() => {
+      saveSurveyState(survey);
+    });
+
+    // Ensure survey UI is updated
+    setTimeout(() => {
+      survey.render(); // Ensure survey UI is updated
+    }, 0);
+
+    setInitialized(true);
+  }, [alertResults, theme]);
+
   useEffect(() => {
-    if (!initialized) {
-      const survey = new Model(surveyJson);
-      surveyRef.current = survey;
-      survey.onComplete.add(alertResults);
+    initializeSurvey();
 
-      // Apply the initial theme
-      const currentTheme = theme === 'default-light' ? defaultLightTheme : defaultDarkTheme;
-      survey.applyTheme(currentTheme);
-
-      // Load survey state
-      loadSurveyState(survey);
-
-      // Ensure survey UI is updated
-      setTimeout(() => {
-        survey.render(); // Ensure survey UI is updated
-      }, 0);
-
-      setInitialized(true);
-    }
-  }, [alertResults, theme, initialized]);
+    return () => {
+      if (surveyRef.current) {
+        saveSurveyState(surveyRef.current);
+      }
+    };
+  }, [initializeSurvey]);
 
   useEffect(() => {
     if (initialized && surveyRef.current) {
