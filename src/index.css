@@ -11,3 +11,58 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.toggle-theme-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #555;
+  fill: #fff;
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 13px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+} 
+
+.reset-form-button {
+  transform: translateX(-50%);
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  background-color: #555;
+  fill: #fff;
+  color: #fff;
+  border: none;
+  width: 120px;
+  height: 50px;
+  border-radius: 40px;
+  padding: 13px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+} 
+
+.sd-completedpage, .sv-components-row {
+  height: calc(100vh - 88px)!important;
+}
+
+@media screen and (max-width: 460px){
+  .sd-completedpage, .sv-components-row {
+    height: calc(100vh - 112px)!important;
+  }
+}
+
+
+.toggle-theme-button:hover, .toggle-theme-button:active {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-theme-button svg {
+  width: 25px;
+  height: 25px;
+}
