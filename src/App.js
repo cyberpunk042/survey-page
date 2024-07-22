@@ -6,15 +6,10 @@ import defaultDarkTheme from 'survey-core/themes/default-dark';
 import 'survey-core/defaultV2.min.css';
 import surveyJson from './app-server-applications-survey.json';
 
-//const surveyJson = import('./app-server-applications-survey.json');
-//const surveyJson = JSON.parse(fs.readFileSync('./app-server-applications-survey.json', 'utf-8'))
-
 const resetBtn = (onUserClick) => {
-  //if(typeof survey !== "undefined" && survey !== null && survey.state === "completed"){
     return (
       <button className='reset-form-button' onClick={onUserClick}>Reset Form</button>
     )
-  //}
 }
 const lightModeSvg = () => {
   return (
