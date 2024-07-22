@@ -1,570 +1,671 @@
 {
-    "title": "Server Applicative Recipe",
-    "description": "Needs assessment to determine what will be installed on your Server(s).",
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "title": "Content of the recipe",
-        "description": "There are a lot of options in the list below. The lower you go in the list, the more complex and costly your estimate/quote will be. Be mindful of your choices.",
-        "elements": [
-          {
-            "type": "checkbox",
-            "name": "app_types",
-            "title": "Select the Types of Applications Setup",
-            "description": "Choose the type of applications setup based on complexity and performance requirements. You can select multiple options.",
-            "isRequired": true,
-            "choices": [
-              {
-                "value": "open_source_bundle",
-                "text": "Catalogue of Open Source Applications"
-              },
-              {
-                "value": "static_web_servers",
-                "text": "Static Web Servers (Exposable Pages)"
-              },
-              {
-                "value": "docker_compose_bundle",
-                "text": "Docker Compose: Build Your Bundle"
-              },
-              {
-                "value": "web_apps_bundle",
-                "text": "Cloud Apps & Services Integrations"
-              },
-              {
-                "value": "native_modules_bundle",
-                "text": "Custom Application: Native Code"
-              },
-              {
-                "value": "infrastructure_as_code",
-                "text": "Infrastructure as Code (IaC)"
-              },
-              {
-                "value": "meshing_of_app",
-                "text": "Meshing of Applications"
-              }
-            ],
-            "otherPlaceholder": "Describe your custom application setup...",
-            "otherText": "Custom Application Setup"
-          },
-          {
-            "type": "panel",
-            "name": "essential_services",
-            "visibleIf": "{app_types} allof ['open_source_bundle']",
-            "title": "Essential Services",
-            "description": "Low Resource Cost ($) -> High Resource Cost ($$$)\r\nResource in terms of hardware and configuration",
-            "state": "collapsed",
-            "elements": [
-              {
-                "type": "checkbox",
-                "name": "essential_services_items",
-                "title": "Select the essential services you need:",
-                "choices": [
-                  {
-                    "value": "nextcloud",
-                    "text": "Nextcloud ($$) 📁 Private cloud storage for file syncing and sharing."
-                  },
-                  {
-                    "value": "plex",
-                    "text": "Plex ($) 🎥 Media server application for organizing and streaming media."
-                  },
-                  {
-                    "value": "minio",
-                    "text": "Minio ($$) 💾 High-performance, distributed object storage server."
-                  },
-                  {
-                    "value": "syncthing",
-                    "text": "Syncthing ($) 🔄 Open-source continuous file synchronization program."
-                  },
-                  {
-                    "value": "pihole",
-                    "text": "Pihole ($) 🛡️ Network-wide ad blocker."
-                  },
-                  {
-                    "value": "monica",
-                    "text": "Monica ($$) 📝 Personal relationship manager."
-                  },
-                  {
-                    "value": "littlelink",
-                    "text": "LittleLink ($) 🌐 Minimalistic link tree alternative."
-                  },
-                  {
-                    "value": "traefik",
-                    "text": "Traefik ($$) 🚦 Cloud-native application proxy and load balancer."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "advanced_services",
-            "visibleIf": "{app_types} allof ['open_source_bundle']",
-            "title": "Advanced Services",
-            "description": "Low Resource Cost ($) -> High Resource Cost ($$$)\r\nResource in terms of hardware and configuration",
-            "state": "collapsed",
-            "elements": [
-              {
-                "type": "checkbox",
-                "name": "advanced_services_items",
-                "title": "Select the advanced services you need:",
-                "choices": [
-                  {
-                    "value": "n8n_automation",
-                    "text": "n8n Automation ($$$) 🤖 Workflow automation tool for complex processes."
-                  },
-                  {
-                    "value": "vaultwarden",
-                    "text": "Vaultwarden ($) 🔒 Self-hosted password manager."
-                  },
-                  {
-                    "value": "photoprism",
-                    "text": "Photoprism ($$) 📸 AI-powered photo management app."
-                  },
-                  {
-                    "value": "openldap",
-                    "text": "OpenLDAP ($$) 📂 Open-source implementation of the LDAP protocol."
-                  },
-                  {
-                    "value": "handbrake",
-                    "text": "Handbrake ($) 🎬 Tool for converting video to modern codecs."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "specialized_services",
-            "visibleIf": "{app_types} allof ['open_source_bundle']",
-            "title": "Specialized Services",
-            "description": "Low Resource Cost ($) -> High Resource Cost ($$$)\nResource in terms of hardware and configuration",
-            "state": "collapsed",
-            "elements": [
-              {
-                "type": "checkbox",
-                "name": "specialized_services_items",
-                "title": "Select the specialized services you need:",
-                "choices": [
-                  {
-                    "value": "node_red",
-                    "text": "Node-RED ($$) 🌐 Flow-based development tool for visual programming."
-                  },
-                  {
-                    "value": "ntfy",
-                    "text": "Ntfy ($) 🔔 Real-time notification service."
-                  },
-                  {
-                    "value": "uptime_kuma",
-                    "text": "Uptime Kuma ($) ⏱️ Open-source uptime monitoring tool."
-                  },
-                  {
-                    "value": "watcharr",
-                    "text": "Watcharr ($) 📺 Tool for managing various media services."
-                  },
-                  {
-                    "value": "form_survey_tool",
-                    "text": "SurveyJS ($$) 📊 Tool for creating and managing online forms and surveys."
-                  },
-                  {
-                    "value": "home_mail_server",
-                    "text": "Home Mail Server ($$$) 📧 Private mail server solution (not recommended due to high complexity)."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "static_web_servers",
-            "visibleIf": "{app_types} allof ['static_web_servers']",
-            "title": "Static Web Servers",
-            "description": "Define your Static Web Servers. You can add up to 10 servers.\n\nIts important to understand that \"Static Web Servers\" are for Production / Compiled Web Application Builds that Do Not Require a backend such as NodeJS, Python, C#, Java, but only serves static files. (e.g. .html, .css, .js, ...)",
-            "elements": [
-              {
-                "type": "paneldynamic",
-                "name": "static_web_server_list",
-                "title": "Static Web Servers",
-                "description": "Add and define static web servers name.",
-                "templateElements": [
-                  {
-                    "type": "text",
-                    "name": "static_web_server_name",
-                    "title": "Server Name",
-                    "isRequired": true
-                  }
-                ],
-                "panelCount": 1,
-                "minPanelCount": 1,
-                "maxPanelCount": 10,
-                "panelAddText": "Add Another Static Web Server",
-                "panelRemoveText": "Remove Static Web Server"
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "cloud_services",
-            "visibleIf": "{app_types} allof ['web_apps_bundle']",
-            "title": "Cloud Services Integration",
-            "description": "These type of integration might require a tool such as Zappier (cloud) or Automatisch (self-host) for integrations and automated workflows",
-            "state": "collapsed",
-            "elements": [
-              {
-                "type": "checkbox",
-                "name": "cloud_services_items",
-                "title": "Select the cloud services you need integration with:",
-                "choices": [
-                  {
-                    "value": "typeform",
-                    "text": "TypeForm 📋 Online form and survey tool."
-                  },
-                  {
-                    "value": "monday",
-                    "text": "Monday 📅 Work OS for project management."
-                  },
-                  {
-                    "value": "slack",
-                    "text": "Slack 💬 Team collaboration and communication tool."
-                  },
-                  {
-                    "value": "hubspot_crm",
-                    "text": "HubSpot CRM 📈 Customer relationship management software."
-                  },
-                  {
-                    "value": "google_workspace",
-                    "text": "Google Workspace 🗂️ Suite of cloud computing, productivity, and collaboration tools."
-                  },
-                  {
-                    "value": "microsoft_365",
-                    "text": "Microsoft 365 🗂️ Cloud-based productivity suite including Office applications."
-                  },
-                  {
-                    "value": "dropbox",
-                    "text": "Dropbox 🗄️ File hosting service for cloud storage and file synchronization."
-                  },
-                  {
-                    "value": "trello",
-                    "text": "Trello 📝 Project management tool for organizing tasks."
-                  },
-                  {
-                    "value": "asana",
-                    "text": "Asana 📅 Web and mobile application for project management."
-                  },
-                  {
-                    "value": "salesforce",
-                    "text": "Salesforce 📈 Customer relationship management (CRM) platform."
-                  },
-                  {
-                    "value": "zendesk",
-                    "text": "Zendesk 🛠️ Customer service software and support ticketing system."
-                  },
-                  {
-                    "value": "intercom",
-                    "text": "Intercom 💬 Customer communication platform."
-                  },
-                  {
-                    "value": "stripe",
-                    "text": "Stripe 💳 Payment processing for internet businesses."
-                  },
-                  {
-                    "value": "mailchimp",
-                    "text": "Mailchimp 📧 Email marketing service."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "custom_native_module",
-            "visibleIf": "{app_types} allof ['native_modules_bundle']",
-            "title": "Custom Native Module",
-            "description": "Provide details for a custom native module, including up to 5 features.",
-            "elements": [
-              {
-                "type": "text",
-                "name": "custom_native_module_name",
-                "title": "Platform Name",
-                "isRequired": true
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_language",
-                "title": "Choose the technology/language for your custom application:",
-                "defaultValue": "Item 1",
-                "isRequired": true,
-                "choices": [
-                  {
-                    "value": "Item 1",
-                    "text": "Most Practical / Recommended choice"
-                  },
-                  "TypeScript",
-                  "JavaScript",
-                  "Static HTML",
-                  "PHP",
-                  "C# (ASP.NET)",
-                  "Java",
-                  "Python",
-                  "Go",
-                  "Ruby",
-                  "Rust"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework",
-                "visibleIf": "{custom_native_module_language} anyof ['TypeScript', 'JavaScript']",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "React",
-                  "Vue",
-                  "Angular",
-                  "Next.js",
-                  "Gatsby",
-                  "Svelte"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_php",
-                "visibleIf": "{custom_native_module_language} = 'PHP'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "Laravel",
-                  "Symfony",
-                  "CodeIgniter",
-                  "Yii",
-                  "Zend Framework"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_csharp",
-                "visibleIf": "{custom_native_module_language} = 'C# (ASP.NET)'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "ASP.NET Core",
-                  "Blazor",
-                  "NancyFX"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_java",
-                "visibleIf": "{custom_native_module_language} = 'Java'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "Spring",
-                  "Hibernate",
-                  "Struts",
-                  "JSF"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_python",
-                "visibleIf": "{custom_native_module_language} = 'Python'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "Django",
-                  "Flask",
-                  "FastAPI",
-                  "Tornado"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_go",
-                "visibleIf": "{custom_native_module_language} = 'Go'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "Gin",
-                  "Echo",
-                  "Fiber",
-                  "Revel"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_ruby",
-                "visibleIf": "{custom_native_module_language} = 'Ruby'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "Ruby on Rails",
-                  "Sinatra",
-                  "Hanami"
-                ]
-              },
-              {
-                "type": "dropdown",
-                "name": "custom_native_module_framework_rust",
-                "visibleIf": "{custom_native_module_language} = 'Rust'",
-                "title": "Choose the framework for your custom application:",
-                "choices": [
-                  "Rocket",
-                  "Actix",
-                  "Warp"
-                ]
-              },
-              {
-                "type": "comment",
-                "name": "question1",
-                "title": "Application Description",
-                "description": "This description is important for us to understand how your features go together and the general domain / direction. "
-              },
-              {
-                "type": "paneldynamic",
-                "name": "custom_native_module_features",
-                "title": "Features",
-                "description": "Add up to 5 features with a name, description, and optional example link or image.",
-                "templateElements": [
-                  {
-                    "type": "text",
-                    "name": "feature_name",
-                    "title": "Feature Name",
-                    "isRequired": true
-                  },
-                  {
-                    "type": "comment",
-                    "name": "feature_description",
-                    "title": "Feature Description",
-                    "isRequired": true
-                  },
-                  {
-                    "type": "text",
-                    "name": "feature_example",
-                    "title": "Example Link (optional)",
-                    "inputType": "url"
-                  },
-                  {
-                    "type": "file",
-                    "name": "feature_image",
-                    "title": "Example Image (optional)",
-                    "storeDataAsText": false,
-                    "maxSize": 1024000
-                  }
-                ],
-                "panelCount": 1,
-                "maxPanelCount": 5,
-                "panelAddText": "Add Another Feature",
-                "panelRemoveText": "Remove Feature"
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "docker_compose_components",
-            "visibleIf": "{app_types} anyof ['native_modules_bundle', 'docker_compose_bundle']",
-            "title": "Docker Compose Components",
-            "description": "Select the components/containers to include in your Docker Compose setup.",
-            "elements": [
-              {
-                "type": "checkbox",
-                "name": "docker_compose_items",
-                "title": "Select the applications to include in your Docker Compose setup:",
-                "choices": [
-                  {
-                    "value": "redis_docker",
-                    "text": "Redis Docker ($) ⚡ In-memory data structure store used as a database, cache, and message broker."
-                  },
-                  {
-                    "value": "postgresql_docker",
-                    "text": "PostgreSQL Docker ($$) 🗄️ Advanced, enterprise-class, and open-source relational database system."
-                  },
-                  {
-                    "value": "mysql_docker",
-                    "text": "MySQL Docker ($$) 🗄️ Widely used open-source relational database management system."
-                  },
-                  {
-                    "value": "mariadb_docker",
-                    "text": "MariaDB Docker ($$) 🗄️ Community-developed, commercially supported fork of the MySQL relational database management system."
-                  },
-                  {
-                    "value": "mongodb_docker",
-                    "text": "MongoDB Docker ($$) 🗄️ NoSQL database program, uses JSON-like documents with optional schemas."
-                  },
-                  {
-                    "value": "nginx_docker",
-                    "text": "Nginx Docker ($) 🌐 Web server that can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache."
-                  },
-                  {
-                    "value": "apache_docker",
-                    "text": "Apache Docker ($) 🌐 Open-source cross-platform web server software."
-                  },
-                  {
-                    "value": "elasticsearch_docker",
-                    "text": "Elasticsearch Docker ($$$) 🔍 Distributed, RESTful search and analytics engine."
-                  },
-                  {
-                    "value": "kibana_docker",
-                    "text": "Kibana Docker ($$$) 📊 Data visualization plugin for Elasticsearch."
-                  },
-                  {
-                    "value": "logstash_docker",
-                    "text": "Logstash Docker ($$$) 📑 Server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash.'"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "infrastructure_as_code",
-            "visibleIf": "{app_types} anyof ['infrastructure_as_code']",
-            "title": "Infrastructure as Code",
-            "description": "If you don't know what it is, this is most likely not for you.\n",
-            "elements": [
-              {
-                "type": "html",
-                "name": "iac_info",
-                "html": "<a href=\"https://www.hashicorp.com/resources/what-is-infrastructure-as-code\" target=\"_blank\">What Is Infrastructure As Code? (By Hashicorp)</a>"
-              },
-              {
-                "type": "checkbox",
-                "name": "iac_items",
-                "title": "Select the type IaC desired",
-                "choices": [
-                  {
-                    "value": "k8s_full",
-                    "text": "Kubernetes - K8s (Full fledge orchestrator)"
-                  },
-                  {
-                    "value": "k3s_minimal",
-                    "text": "Kubernetes - K3s (Minimal orchestrator)"
-                  },
-                  {
-                    "value": "helm_charts",
-                    "text": "Helm Charts"
-                  },
-                  {
-                    "value": "terraform",
-                    "text": "Terraform"
-                  },
-                  {
-                    "value": "opentofu",
-                    "text": "OpenTOFU"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "panel",
-            "name": "meshing_of_app",
-            "visibleIf": "{app_types} anyof ['meshing_of_app']",
-            "title": "Meshing of Application",
-            "description": "Meshing of Applications is for when you need tools to talk to each other.\nSimilar to the integrations of Cloud Apps & Services, you describe here how you expect your applications to be bound/talk to each other.",
-            "elements": [
-              {
-                "type": "comment",
-                "name": "meshing_expectations",
-                "title": "Describe your expectations",
-                "description": "If you don't know but think you might need this, just say it and why."
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "title": "Server Applicative Recipe",
+  "description": "Needs assessment to determine what will be installed on your Server(s).",
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "page1",
+      "title": "Content of the recipe",
+      "description": "There are a lot of options in the list below. The lower you go in the list, the more complex and costly your estimate/quote will be. Be mindful of your choices.",
+      "elements": [
+        {
+          "type": "checkbox",
+          "name": "app_types",
+          "title": "Select the Types of Applications Setup",
+          "description": "Choose the type of applications setup based on complexity and performance requirements. You can select multiple options.",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "open_source_bundle",
+              "text": "Catalogue of Open Source Applications"
+            },
+            {
+              "value": "static_web_servers",
+              "text": "Static Web Servers (Exposable Pages)"
+            },
+            {
+              "value": "docker_compose_bundle",
+              "text": "Docker Compose: Build Your Bundle"
+            },
+            {
+              "value": "web_apps_bundle",
+              "text": "Cloud Apps & Services Integrations"
+            },
+            {
+              "value": "native_modules_bundle",
+              "text": "Custom Application: Native Code"
+            },
+            {
+              "value": "Item 1",
+              "text": "Exposed Applications (Internet)"
+            },
+            {
+              "value": "infrastructure_as_code",
+              "text": "Infrastructure as Code (IaC)"
+            },
+            {
+              "value": "meshing_of_app",
+              "text": "Meshing of Applications"
+            }
+          ],
+          "otherPlaceholder": "Describe your custom application setup...",
+          "otherText": "Custom Application Setup"
+        },
+        {
+          "type": "panel",
+          "name": "essential_services",
+          "visibleIf": "{app_types} allof ['open_source_bundle']",
+          "title": "Essential Services",
+          "description": "Low Resource Cost ($) -> High Resource Cost ($$$)\r\nResource in terms of hardware and configuration",
+          "state": "collapsed",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "essential_services_items",
+              "title": "Select the essential services you need:",
+              "choices": [
+                {
+                  "value": "Item 1",
+                  "text": "Cloudflared ($) - Recommended for exposition of applications to internet."
+                },
+                {
+                  "value": "nextcloud",
+                  "text": "Nextcloud ($$) 📁 Private cloud storage for file syncing and sharing."
+                },
+                {
+                  "value": "plex",
+                  "text": "Plex ($) 🎥 Media server application for organizing and streaming media."
+                },
+                {
+                  "value": "minio",
+                  "text": "Minio ($$) 💾 High-performance, distributed object storage server."
+                },
+                {
+                  "value": "syncthing",
+                  "text": "Syncthing ($) 🔄 Open-source continuous file synchronization program."
+                },
+                {
+                  "value": "pihole",
+                  "text": "Pihole ($) 🛡️ Network-wide ad blocker."
+                },
+                {
+                  "value": "monica",
+                  "text": "Monica ($$) 📝 Personal relationship manager."
+                },
+                {
+                  "value": "littlelink",
+                  "text": "LittleLink ($) 🌐 Minimalistic link tree alternative."
+                },
+                {
+                  "value": "traefik",
+                  "text": "Traefik ($$) 🚦 Cloud-native application proxy and load balancer."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "advanced_services",
+          "visibleIf": "{app_types} allof ['open_source_bundle']",
+          "title": "Advanced Services",
+          "description": "Low Resource Cost ($) -> High Resource Cost ($$$)\r\nResource in terms of hardware and configuration",
+          "state": "collapsed",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "advanced_services_items",
+              "title": "Select the advanced services you need:",
+              "choices": [
+                {
+                  "value": "n8n_automation",
+                  "text": "n8n Automation ($$$) 🤖 Workflow automation tool for complex processes."
+                },
+                {
+                  "value": "vaultwarden",
+                  "text": "Vaultwarden ($) 🔒 Self-hosted password manager."
+                },
+                {
+                  "value": "photoprism",
+                  "text": "Photoprism ($$) 📸 AI-powered photo management app."
+                },
+                {
+                  "value": "openldap",
+                  "text": "OpenLDAP ($$) 📂 Open-source implementation of the LDAP protocol."
+                },
+                {
+                  "value": "handbrake",
+                  "text": "Handbrake ($) 🎬 Tool for converting video to modern codecs."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "specialized_services",
+          "visibleIf": "{app_types} allof ['open_source_bundle']",
+          "title": "Specialized Services",
+          "description": "Low Resource Cost ($) -> High Resource Cost ($$$)\nResource in terms of hardware and configuration",
+          "state": "collapsed",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "specialized_services_items",
+              "title": "Select the specialized services you need:",
+              "choices": [
+                {
+                  "value": "node_red",
+                  "text": "Node-RED ($$) 🌐 Flow-based development tool for visual programming."
+                },
+                {
+                  "value": "ntfy",
+                  "text": "Ntfy ($) 🔔 Real-time notification service."
+                },
+                {
+                  "value": "uptime_kuma",
+                  "text": "Uptime Kuma ($) ⏱️ Open-source uptime monitoring tool."
+                },
+                {
+                  "value": "watcharr",
+                  "text": "Watcharr ($) 📺 Tool for managing various media services."
+                },
+                {
+                  "value": "form_survey_tool",
+                  "text": "SurveyJS ($$) 📊 Tool for creating and managing online forms and surveys."
+                },
+                {
+                  "value": "home_mail_server",
+                  "text": "Home Mail Server ($$$) 📧 Private mail server solution (not recommended due to high complexity)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "static_web_servers",
+          "visibleIf": "{app_types} allof ['static_web_servers']",
+          "title": "Static Web Servers",
+          "description": "Define your Static Web Servers. You can add up to 10 servers.\n\nIts important to understand that \"Static Web Servers\" are for Production / Compiled Web Application Builds that Do Not Require a backend such as NodeJS, Python, C#, Java, but only serves static files. (e.g. .html, .css, .js, ...)",
+          "elements": [
+            {
+              "type": "expression",
+              "name": "note-for-exposed-applications",
+              "title": "Notice",
+              "description": "Make sure to check option \"Exposed Applications\" to have your static web servers setup for access from anywhere. ( World Wide Web )"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "static_web_server_list",
+              "title": "Static Web Servers",
+              "description": "Add and define static web servers name.",
+              "templateElements": [
+                {
+                  "type": "panel",
+                  "name": "static_web_server_name",
+                  "title": "Server",
+                  "isRequired": true,
+                  "elements": [
+                    {
+                      "type": "text",
+                      "name": "question3",
+                      "title": "Name"
+                    },
+                    {
+                      "type": "checkbox",
+                      "name": "question4",
+                      "title": "I would like ",
+                      "choices": [
+                        "Item 1",
+                        "Item 2",
+                        "Item 3"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "panelCount": 1,
+              "minPanelCount": 1,
+              "maxPanelCount": 10,
+              "panelAddText": "Add Another Static Web Server",
+              "panelRemoveText": "Remove Static Web Server"
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "cloud_services",
+          "visibleIf": "{app_types} allof ['web_apps_bundle']",
+          "title": "Cloud Services Integration",
+          "description": "These type of integration might require a tool such as Zappier (cloud) or Automatisch (self-host) for integrations and automated workflows",
+          "state": "collapsed",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "cloud_services_items",
+              "title": "Select the cloud services you need integration with:",
+              "choices": [
+                {
+                  "value": "typeform",
+                  "text": "TypeForm 📋 Online form and survey tool."
+                },
+                {
+                  "value": "monday",
+                  "text": "Monday 📅 Work OS for project management."
+                },
+                {
+                  "value": "slack",
+                  "text": "Slack 💬 Team collaboration and communication tool."
+                },
+                {
+                  "value": "hubspot_crm",
+                  "text": "HubSpot CRM 📈 Customer relationship management software."
+                },
+                {
+                  "value": "google_workspace",
+                  "text": "Google Workspace 🗂️ Suite of cloud computing, productivity, and collaboration tools."
+                },
+                {
+                  "value": "microsoft_365",
+                  "text": "Microsoft 365 🗂️ Cloud-based productivity suite including Office applications."
+                },
+                {
+                  "value": "dropbox",
+                  "text": "Dropbox 🗄️ File hosting service for cloud storage and file synchronization."
+                },
+                {
+                  "value": "trello",
+                  "text": "Trello 📝 Project management tool for organizing tasks."
+                },
+                {
+                  "value": "asana",
+                  "text": "Asana 📅 Web and mobile application for project management."
+                },
+                {
+                  "value": "salesforce",
+                  "text": "Salesforce 📈 Customer relationship management (CRM) platform."
+                },
+                {
+                  "value": "zendesk",
+                  "text": "Zendesk 🛠️ Customer service software and support ticketing system."
+                },
+                {
+                  "value": "intercom",
+                  "text": "Intercom 💬 Customer communication platform."
+                },
+                {
+                  "value": "stripe",
+                  "text": "Stripe 💳 Payment processing for internet businesses."
+                },
+                {
+                  "value": "mailchimp",
+                  "text": "Mailchimp 📧 Email marketing service."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "custom_native_module",
+          "visibleIf": "{app_types} allof ['native_modules_bundle']",
+          "title": "Custom Native Module",
+          "description": "Provide details for a custom native module, including up to 5 features.",
+          "elements": [
+            {
+              "type": "text",
+              "name": "custom_native_module_name",
+              "title": "Platform Name",
+              "isRequired": true
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_language",
+              "title": "Choose the technology/language for your custom application:",
+              "defaultValue": "Item 1",
+              "isRequired": true,
+              "choices": [
+                {
+                  "value": "Item 1",
+                  "text": "Most Practical / Recommended choice"
+                },
+                "TypeScript",
+                "JavaScript",
+                "Static HTML",
+                "PHP",
+                "C# (ASP.NET)",
+                "Java",
+                "Python",
+                "Go",
+                "Ruby",
+                "Rust"
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework",
+              "visibleIf": "{custom_native_module_language} anyof ['TypeScript', 'JavaScript']",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                {
+                  "value": "recommended",
+                  "text": "Most Practical / Recommended choice"
+                },
+                "React",
+                "Vue",
+                "Angular",
+                "Next.js",
+                "Gatsby",
+                "Svelte"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_php",
+              "visibleIf": "{custom_native_module_language} = 'PHP'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "Laravel",
+                "Symfony",
+                "CodeIgniter",
+                "Yii",
+                "Zend Framework"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_csharp",
+              "visibleIf": "{custom_native_module_language} = 'C# (ASP.NET)'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "ASP.NET Core",
+                "Blazor",
+                "NancyFX"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_java",
+              "visibleIf": "{custom_native_module_language} = 'Java'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "Spring",
+                "Hibernate",
+                "Struts",
+                "JSF"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_python",
+              "visibleIf": "{custom_native_module_language} = 'Python'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "Django",
+                "Flask",
+                "FastAPI",
+                "Tornado"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_go",
+              "visibleIf": "{custom_native_module_language} = 'Go'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "Gin",
+                "Echo",
+                "Fiber",
+                "Revel"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_ruby",
+              "visibleIf": "{custom_native_module_language} = 'Ruby'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "Ruby on Rails",
+                "Sinatra",
+                "Hanami"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "dropdown",
+              "name": "custom_native_module_framework_rust",
+              "visibleIf": "{custom_native_module_language} = 'Rust'",
+              "title": "Choose the framework for your custom application:",
+              "choices": [
+                "Rocket",
+                "Actix",
+                "Warp"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other (name it)"
+            },
+            {
+              "type": "comment",
+              "name": "question1",
+              "title": "Application Description",
+              "description": "This description is important for us to understand how your features go together and the general domain / direction. "
+            },
+            {
+              "type": "paneldynamic",
+              "name": "custom_native_module_features",
+              "title": "Features",
+              "description": "Add up to 5 features with a name, description, and optional example link or image.",
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "feature_name",
+                  "title": "Feature Name",
+                  "isRequired": true
+                },
+                {
+                  "type": "comment",
+                  "name": "feature_description",
+                  "title": "Feature Description",
+                  "isRequired": true
+                },
+                {
+                  "type": "text",
+                  "name": "feature_example",
+                  "title": "Example Link (optional)",
+                  "inputType": "url"
+                },
+                {
+                  "type": "file",
+                  "name": "feature_image",
+                  "title": "Example Image (optional)",
+                  "storeDataAsText": false,
+                  "maxSize": 1024000
+                }
+              ],
+              "panelCount": 1,
+              "maxPanelCount": 5,
+              "panelAddText": "Add Another Feature",
+              "panelRemoveText": "Remove Feature"
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "docker_compose_components",
+          "visibleIf": "{app_types} anyof ['native_modules_bundle', 'docker_compose_bundle']",
+          "title": "Docker Compose Components",
+          "description": "Select the components/containers to include in your Docker Compose setup.",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "docker_compose_items",
+              "title": "Select the applications to include in your Docker Compose setup:",
+              "choices": [
+                {
+                  "value": "redis_docker",
+                  "text": "Redis Docker ($) ⚡ In-memory data structure store used as a database, cache, and message broker."
+                },
+                {
+                  "value": "postgresql_docker",
+                  "text": "PostgreSQL Docker ($$) 🗄️ Advanced, enterprise-class, and open-source relational database system."
+                },
+                {
+                  "value": "mysql_docker",
+                  "text": "MySQL Docker ($$) 🗄️ Widely used open-source relational database management system."
+                },
+                {
+                  "value": "mariadb_docker",
+                  "text": "MariaDB Docker ($$) 🗄️ Community-developed, commercially supported fork of the MySQL relational database management system."
+                },
+                {
+                  "value": "mongodb_docker",
+                  "text": "MongoDB Docker ($$) 🗄️ NoSQL database program, uses JSON-like documents with optional schemas."
+                },
+                {
+                  "value": "nginx_docker",
+                  "text": "Nginx Docker ($) 🌐 Web server that can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache."
+                },
+                {
+                  "value": "apache_docker",
+                  "text": "Apache Docker ($) 🌐 Open-source cross-platform web server software."
+                },
+                {
+                  "value": "elasticsearch_docker",
+                  "text": "Elasticsearch Docker ($$$) 🔍 Distributed, RESTful search and analytics engine."
+                },
+                {
+                  "value": "kibana_docker",
+                  "text": "Kibana Docker ($$$) 📊 Data visualization plugin for Elasticsearch."
+                },
+                {
+                  "value": "logstash_docker",
+                  "text": "Logstash Docker ($$$) 📑 Server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash.'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "infrastructure_as_code",
+          "visibleIf": "{app_types} anyof ['infrastructure_as_code']",
+          "title": "Infrastructure as Code",
+          "description": "If you don't know what it is, this is most likely not for you.\n",
+          "elements": [
+            {
+              "type": "html",
+              "name": "iac_info",
+              "html": "<a href=\"https://www.hashicorp.com/resources/what-is-infrastructure-as-code\" target=\"_blank\">What Is Infrastructure As Code? (By Hashicorp)</a>"
+            },
+            {
+              "type": "checkbox",
+              "name": "iac_items",
+              "title": "Select the type IaC desired",
+              "choices": [
+                {
+                  "value": "k8s_full",
+                  "text": "Kubernetes - K8s (Full fledge orchestrator)"
+                },
+                {
+                  "value": "k3s_minimal",
+                  "text": "Kubernetes - K3s (Minimal orchestrator)"
+                },
+                {
+                  "value": "helm_charts",
+                  "text": "Helm Charts"
+                },
+                {
+                  "value": "terraform",
+                  "text": "Terraform"
+                },
+                {
+                  "value": "opentofu",
+                  "text": "OpenTOFU"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "meshing_of_app",
+          "visibleIf": "{app_types} anyof ['meshing_of_app']",
+          "title": "Meshing of Application",
+          "description": "Meshing of Applications is for when you need tools to talk to each other.\nSimilar to the integrations of Cloud Apps & Services, you describe here how you expect your applications to be bound/talk to each other.",
+          "elements": [
+            {
+              "type": "comment",
+              "name": "meshing_expectations",
+              "title": "Describe your expectations",
+              "description": "If you don't know but think you might need this, just say it and why."
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "panel1",
+          "visibleIf": "{app_types} anyof ['Item 1']",
+          "title": "Domain registrar credentials are the kind of information we may need.",
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "question2",
+              "title": "Are you aware that when exposing your service with a tool such as Cloudflared or exposing services in general to Internet, you need to purchase a Domain Name (DNS) from a Domain Registrar. (CA)",
+              "description": "\nYou will receive an email with more details and the invitation to a short survey if necessary.",
+              "isRequired": true,
+              "commentText": "Other (describde)",
+              "choices": [
+                {
+                  "value": "Item ",
+                  "text": "I am not aware, I need more direction, more information"
+                },
+                {
+                  "value": "Item 2",
+                  "text": "I confirm that I am aware & I am able to create my own DNS"
+                },
+                {
+                  "value": "Item 3",
+                  "text": "I am aware, but I am not sure how to create my own DNS"
+                }
+              ],
+              "showOtherItem": true,
+              "otherPlaceholder": "e.g. my-web-app-public-url.net",
+              "otherText": "I want you to create me a new registrar account & DNS:"
+            },
+            {
+              "type": "radiogroup",
+              "name": "concious-of-exposing-web-service",
+              "title": "Are you informed and conscious about the \"dangers\" / risks of exposing your application to the Internet ?",
+              "description": "Security is our priority and making sure that you are properly informed is key. An email will be sent to sensitive you if needed.",
+              "isRequired": true,
+              "choices": [
+                {
+                  "value": "Item 1",
+                  "text": "I confirm that I know the implications / risks well enough"
+                },
+                {
+                  "value": "Item 2",
+                  "text": "No, I would like you to help me be more informed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
