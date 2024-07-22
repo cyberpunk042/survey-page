@@ -43,20 +43,57 @@ code {
   border-radius: 40px;
   padding: 13px;
   font-size: 16px;
+  font-family: var(--sjs-font-family, var(--font-family, var(--sjs-default-font-family)));
   cursor: pointer;
   z-index: 1000;
 } 
 
+/* form onboarding */
+/*
 .sd-completedpage, .sv-components-row {
   height: calc(100vh - 88px)!important;
 }
 
-@media screen and (max-width: 460px){
+@media screen and (max-width: 320px){
   .sd-completedpage, .sv-components-row {
     height: calc(100vh - 112px)!important;
   }
 }
+*/
+/* form onboarding end*/
 
+/***** form applicative ******/
+.sd-completedpage, .sv-components-row {
+  height: calc(100vh - 120px)!important;
+}
+
+
+@media screen and (min-width: 550px) and (max-width: 600px){
+  .sd-completedpage, .sv-components-row {
+    height: calc(100vh - 104px)!important;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 436px){
+  .sd-completedpage, .sv-components-row {
+    height: calc(100vh - 168px)!important;
+  }
+}
+
+
+@media screen and (min-width: 437px) and (max-width: 460px){
+  .sd-completedpage, .sv-components-row {
+    height: calc(100vh - 128px)!important;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .sd-completedpage, .sv-components-row {
+    height: calc(100vh - 208px)!important;
+  }
+}
+
+/***** form applicative end******/
 
 .toggle-theme-button:hover, .toggle-theme-button:active {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
