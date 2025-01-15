@@ -4,7 +4,7 @@ import { Survey } from 'survey-react-ui';
 import defaultLightTheme from 'survey-core/themes/default-light';
 import defaultDarkTheme from 'survey-core/themes/default-dark';
 import 'survey-core/defaultV2.min.css';
-import surveyJson from './app-server-applications-survey.json';
+//import surveyJson from './app-server-applications-survey.json';
 
 const resetBtn = (onUserClick) => {
     return (
@@ -90,7 +90,22 @@ function App() {
     setDisplayResetBtn(true);
   }, []);
 
-  const initializeSurvey = useCallback(() => {
+  const currentSurvey = "DeviceSurvey"
+  const base_url = "https://mcfrvucrnszaqkfaljrd.supabase.co"
+  const initializeSurvey = useCallback(async() => {
+    let surveyJSON;
+    if(currentSurvey === "DeviceSurvey"){
+
+      response = await fetch(`${base_url}}/functions/v1/retrieve-survey?survey_name=device_survey&no_cache`)
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching clients: ${response.status} ${response.statusText}`);
+      }
+      surveyJson = await response.json();
+    }
+    if(!surveyJson){
+      throw new Error(`Error: no survey json`);
+    }
     const survey = new Model(surveyJson);
     surveyRef.current = survey;
     survey.onComplete.add(surveyCompleted);
