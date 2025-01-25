@@ -84,19 +84,21 @@ function App() {
   const surveyCompleted = useCallback((sender) => {
     saveSurveyState(surveyRef.current);
     const results = JSON.stringify(sender.data);
+    formSubmission(results)
     //alert(results);
     console.log(results);
     
     setDisplayResetBtn(true);
   }, []);
-
-  const currentSurvey = "DeviceSurvey"
+ 
+  const currentSurvey = "onboarding_survey" // server_recipe_survey | onboarding_survey
   const base_url = "https://mcfrvucrnszaqkfaljrd.supabase.co"
+  const params = new URLSearchParams(document.location.search);
   const initializeSurvey = useCallback(async() => {
-    let surveyJSON;
-    if(currentSurvey === "DeviceSurvey"){
+    let surveyJson;
+    if(currentSurvey === "device_survey" || currentSurvey === "server_recipe_survey" || currentSurvey ==="onboarding_survey"){
 
-      response = await fetch(`${base_url}}/functions/v1/retrieve-survey?survey_name=device_survey&no_cache`)
+      const response = await fetch(`${base_url}/functions/v1/retrieve-survey?survey_name=${currentSurvey}&no_cache`)
       
       if (!response.ok) {
         throw new Error(`Error fetching clients: ${response.status} ${response.statusText}`);
@@ -112,7 +114,7 @@ function App() {
 
     // Apply the initial theme
     const savedTheme = localStorage.getItem('savedTheme');
-    if(savedTheme !== undefined && savedTheme != ""){
+    if(savedTheme !== undefined && savedTheme !== ""){
       if(savedTheme === 'default-light'){
         setTheme('default-light');
       }
@@ -172,6 +174,26 @@ function App() {
     surveyRef.current.clear();
     localStorage.setItem('surveyState', undefined);
     setDisplayResetBtn(false);
+  };
+  const formSubmission = async(answers) => {
+    const client_id = params.get("client_id");
+    const response = await fetch(`${base_url}/functions/v1/receive-survey-data?survey_name=${currentSurvey}&client_id=${client_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({surveyResponse: answers})
+    })
+      
+    if (!response.ok) {
+      throw new Error(`Error fetching clients: ${response.status} ${response.statusText}`);
+    }
+    const surveySubmissionResponse = await response.json();
+    if(!surveySubmissionResponse){
+      throw new Error(`Error: no survey submission response`);
+    }
+    //TODO: re-enable
+    //resetForm();
   };
 
   return (

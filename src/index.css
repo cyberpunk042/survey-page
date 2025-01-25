@@ -62,6 +62,10 @@ code {
 */
 /* form onboarding end*/
 
+#sq_127 .sd-html--nested div{
+  color: #555 !important;
+}
+
 /***** form applicative ******/
 .sd-completedpage, .sv-components-row {
   height: calc(100vh - 120px)!important;
